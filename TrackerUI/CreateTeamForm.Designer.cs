@@ -146,14 +146,14 @@
             // 
             // emailValue
             // 
-            this.emailValue.Location = new System.Drawing.Point(253, 119);
+            this.emailValue.Location = new System.Drawing.Point(252, 142);
             this.emailValue.Name = "emailValue";
             this.emailValue.Size = new System.Drawing.Size(143, 42);
             this.emailValue.TabIndex = 20;
             // 
             // lastNameValue
             // 
-            this.lastNameValue.Location = new System.Drawing.Point(252, 79);
+            this.lastNameValue.Location = new System.Drawing.Point(252, 91);
             this.lastNameValue.Name = "lastNameValue";
             this.lastNameValue.Size = new System.Drawing.Size(143, 42);
             this.lastNameValue.TabIndex = 12;
@@ -164,7 +164,7 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(11, 111);
+            this.label2.Location = new System.Drawing.Point(6, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 50);
             this.label2.TabIndex = 19;
@@ -176,7 +176,7 @@
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(11, 71);
+            this.label1.Location = new System.Drawing.Point(6, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(195, 50);
             this.label1.TabIndex = 11;
@@ -184,7 +184,7 @@
             // 
             // firstNameValue
             // 
-            this.firstNameValue.Location = new System.Drawing.Point(252, 38);
+            this.firstNameValue.Location = new System.Drawing.Point(252, 43);
             this.firstNameValue.Name = "firstNameValue";
             this.firstNameValue.Size = new System.Drawing.Size(143, 42);
             this.firstNameValue.TabIndex = 10;
@@ -195,7 +195,7 @@
             this.firstNameLable.BackColor = System.Drawing.Color.White;
             this.firstNameLable.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstNameLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.firstNameLable.Location = new System.Drawing.Point(11, 31);
+            this.firstNameLable.Location = new System.Drawing.Point(9, 38);
             this.firstNameLable.Name = "firstNameLable";
             this.firstNameLable.Size = new System.Drawing.Size(199, 50);
             this.firstNameLable.TabIndex = 9;

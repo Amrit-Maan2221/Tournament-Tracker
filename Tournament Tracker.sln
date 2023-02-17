@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackerLibrary", "TrackerLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerUI", "TrackerUI\TrackerUI.csproj", "{BF8428EC-E79C-4BD5-A092-9487F49C9164}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrackerDBScripts", "TrackerDBScripts", "{2CA1E843-46D1-4327-B7F0-5870B314DC7E}"
+	ProjectSection(SolutionItems) = preProject
+		MatchupEntries.sql = MatchupEntries.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -46,7 +46,7 @@
             this.createTournament.AutoSize = true;
             this.createTournament.Font = new System.Drawing.Font("Segoe UI Light", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createTournament.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.createTournament.Location = new System.Drawing.Point(12, 9);
+            this.createTournament.Location = new System.Drawing.Point(238, 9);
             this.createTournament.Name = "createTournament";
             this.createTournament.Size = new System.Drawing.Size(267, 62);
             this.createTournament.TabIndex = 11;
@@ -92,7 +92,7 @@
             // 
             // prizeAmountValue
             // 
-            this.prizeAmountValue.Location = new System.Drawing.Point(343, 249);
+            this.prizeAmountValue.Location = new System.Drawing.Point(343, 256);
             this.prizeAmountValue.Name = "prizeAmountValue";
             this.prizeAmountValue.Size = new System.Drawing.Size(143, 42);
             this.prizeAmountValue.TabIndex = 17;
@@ -112,7 +112,7 @@
             // 
             // prizePercentageValue
             // 
-            this.prizePercentageValue.Location = new System.Drawing.Point(343, 348);
+            this.prizePercentageValue.Location = new System.Drawing.Point(343, 347);
             this.prizePercentageValue.Name = "prizePercentageValue";
             this.prizePercentageValue.Size = new System.Drawing.Size(143, 42);
             this.prizePercentageValue.TabIndex = 19;
@@ -138,9 +138,9 @@
             this.createPrizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createPrizeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createPrizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.createPrizeButton.Location = new System.Drawing.Point(302, 476);
+            this.createPrizeButton.Location = new System.Drawing.Point(249, 453);
             this.createPrizeButton.Name = "createPrizeButton";
-            this.createPrizeButton.Size = new System.Drawing.Size(174, 41);
+            this.createPrizeButton.Size = new System.Drawing.Size(214, 50);
             this.createPrizeButton.TabIndex = 26;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
