@@ -45,6 +45,8 @@
     <Compile Include="Data Access\IDataConnection.cs" />
     <Compile Include="Data Access\SqlConnector.cs" />
     <Compile Include="Data Access\TextConnector.cs" />
+    <Compile Include="Data Access\TextConnectorProcessor.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Models\MatchupEntryModel.cs" />
     <Compile Include="Models\MatchupModel.cs" />
