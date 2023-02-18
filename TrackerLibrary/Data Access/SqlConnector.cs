@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,27 @@ namespace TrackerLibrary.Data_Access
         /// <returns>The prize information plus the unique identifier.</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            model.Id = 1;
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString("Tournaments")))
+            {
+                SqlCommand command = new SqlCommand("[dbo].[spPrizes_Insert]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@PlaceNumber", model.PlaceNumber);
+                command.Parameters.AddWithValue("@PlaceName", model.PlaceName);
+                command.Parameters.AddWithValue("@PrizeAmount", model.PrizeAmount);
+                command.Parameters.AddWithValue("@PrizePercentage", model.PrizePercentage);
+
+                SqlParameter modelId = new SqlParameter("@Id", SqlDbType.Int);
+                modelId.Direction = ParameterDirection.Output;
+                command.Parameters.Add(modelId);
+                connection.Open();
+                command.ExecuteNonQuery();
+
+                bool placeNumberValidNumber = int.TryParse(modelId.Value.ToString(), out int id);
+                if (placeNumberValidNumber)
+                {
+                    model.Id = id;
+                }
+            }
 
             return model;
         }
