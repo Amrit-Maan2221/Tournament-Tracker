@@ -104,6 +104,7 @@
             this.addTeamMemberButton.TabIndex = 17;
             this.addTeamMemberButton.Text = "Add Member";
             this.addTeamMemberButton.UseVisualStyleBackColor = true;
+            this.addTeamMemberButton.Click += new System.EventHandler(this.addTeamMemberButton_Click);
             // 
             // groupBox1
             // 
@@ -227,7 +228,7 @@
             this.teamMembersListBox.ItemHeight = 36;
             this.teamMembersListBox.Location = new System.Drawing.Point(624, 9);
             this.teamMembersListBox.Name = "teamMembersListBox";
-            this.teamMembersListBox.Size = new System.Drawing.Size(275, 470);
+            this.teamMembersListBox.Size = new System.Drawing.Size(338, 470);
             this.teamMembersListBox.TabIndex = 19;
             // 
             // memberDelete
@@ -238,12 +239,13 @@
             this.memberDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.memberDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.memberDelete.ForeColor = System.Drawing.Color.DarkRed;
-            this.memberDelete.Location = new System.Drawing.Point(996, 9);
+            this.memberDelete.Location = new System.Drawing.Point(994, 242);
             this.memberDelete.Name = "memberDelete";
             this.memberDelete.Size = new System.Drawing.Size(32, 41);
             this.memberDelete.TabIndex = 21;
             this.memberDelete.Text = "x";
             this.memberDelete.UseVisualStyleBackColor = true;
+            this.memberDelete.Click += new System.EventHandler(this.memberDelete_Click);
             // 
             // createTeamButton
             // 

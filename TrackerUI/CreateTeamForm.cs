@@ -14,9 +14,25 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
+        private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
         public CreateTeamForm()
         {
             InitializeComponent();
+            WireUpLists();
+        }
+
+        private void WireUpLists()
+        {
+            selectTeamMemberDropDown.DataSource = null;
+
+            selectTeamMemberDropDown.DataSource = availableTeamMembers;
+            selectTeamMemberDropDown.DisplayMember = "FullName";
+
+            teamMembersListBox.DataSource = null;
+
+            teamMembersListBox.DataSource = selectedTeamMembers;
+            teamMembersListBox.DisplayMember = "FullName";
         }
 
         private void createMemberButton_Click(object sender, EventArgs e)
@@ -32,6 +48,9 @@ namespace TrackerUI
                 };
 
                 GlobalConfig.Connection.CreatePerson(p);
+                selectedTeamMembers.Add(p);
+
+                WireUpLists();
 
                 firstNameValue.Text = string.Empty;
                 lastNameValue.Text = string.Empty;
@@ -72,6 +91,32 @@ namespace TrackerUI
         private void createTeamButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void addTeamMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)selectTeamMemberDropDown.SelectedItem;
+
+            if (p != null)
+            {
+                availableTeamMembers.Remove(p);
+                selectedTeamMembers.Add(p);
+
+                WireUpLists();
+            }
+        }
+
+        private void memberDelete_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)teamMembersListBox.SelectedItem;
+
+            if (p != null)
+            {
+                selectedTeamMembers.Remove(p);
+                availableTeamMembers.Add(p);
+
+                WireUpLists();
+            }
         }
     }
 }

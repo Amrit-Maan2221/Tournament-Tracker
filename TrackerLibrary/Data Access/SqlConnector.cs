@@ -11,6 +11,9 @@ namespace TrackerLibrary.Data_Access
 {
     public class SqlConnector : IDataConnection
     {
+        private const string DATABASE_NAME = "Tournaments";
+
+
         /// <summary>
         /// Saves a new prize to the database
         /// </summary>
@@ -18,7 +21,7 @@ namespace TrackerLibrary.Data_Access
         /// <returns>The prize information plus the unique identifier.</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString("Tournaments")))
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
             {
                 SqlCommand command = new SqlCommand("[dbo].[spPrizes_Insert]", connection);
                 command.CommandType = CommandType.StoredProcedure;
@@ -51,7 +54,7 @@ namespace TrackerLibrary.Data_Access
         /// <returns>The person information plus the unique identifier.</returns>
         public PersonModel CreatePerson(PersonModel model)
         {
-            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString("Tournaments")))
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
             {
                 SqlCommand command = new SqlCommand("[dbo].[spPeople_Insert]", connection);
                 command.CommandType = CommandType.StoredProcedure;
@@ -75,6 +78,39 @@ namespace TrackerLibrary.Data_Access
             }
 
             return model;
+        }
+
+
+        /// <summary>
+        /// Returns a list of all people from the database
+        /// </summary>
+        /// <returns>List of person information</returns>
+        public List<PersonModel> GetPerson_All()
+        {
+            List<PersonModel> output = new List<PersonModel>();
+
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
+            {
+                SqlCommand command = new SqlCommand("[dbo].[spPeople_GetAll]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        PersonModel person= new PersonModel();
+                        person.FirstName = reader["FirstName"].ToString();
+                        person.LastName = reader["LastName"].ToString();
+                        person.CellPhoneNumber = reader["CellphoneNumber"].ToString();
+                        person.EmailAddress = reader["EmailAddress"].ToString();
+                        output.Add(person);
+                    }
+                }
+
+            }
+
+            return output;
         }
     }
 
