@@ -104,6 +104,11 @@ namespace TrackerLibrary.Data_Access
                         person.LastName = reader["LastName"].ToString();
                         person.CellPhoneNumber = reader["CellphoneNumber"].ToString();
                         person.EmailAddress = reader["EmailAddress"].ToString();
+                        bool placeNumberValidNumber = int.TryParse(reader["Id"].ToString(), out int id);
+                        if (placeNumberValidNumber)
+                        {
+                            person.Id = id;
+                        }
                         output.Add(person);
                     }
                 }
@@ -111,6 +116,45 @@ namespace TrackerLibrary.Data_Access
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Saves a new team to the database
+        /// </summary>
+        /// <param name="model">The team information<</param>
+        /// <returns>The team information plus the unique identifier.</returns>
+        public TeamModel CreateTeam(TeamModel teamModel)
+        {
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
+            {
+                SqlCommand insertTeamCommand = new SqlCommand("[dbo].[spTeams_Insert]", connection);
+                insertTeamCommand.CommandType = CommandType.StoredProcedure;
+                insertTeamCommand.Parameters.AddWithValue("@TeamName", teamModel.TeamName);
+
+                SqlParameter teamId = new SqlParameter("@Id", SqlDbType.Int);
+                teamId.Direction = ParameterDirection.Output;
+                insertTeamCommand.Parameters.Add(teamId);
+                connection.Open();
+                insertTeamCommand.ExecuteNonQuery();
+
+                bool placeNumberValidNumber = int.TryParse(teamId.Value.ToString(), out int id);
+                if (placeNumberValidNumber)
+                {
+                    teamModel.Id = id;
+                }
+
+                foreach (PersonModel teamMember in teamModel.TeamMembers)
+                {
+                    SqlCommand insertTeamMemberCommand = new SqlCommand("[dbo].[spTeamMembers_Insert]", connection);
+                    insertTeamMemberCommand.CommandType = CommandType.StoredProcedure;
+                    insertTeamMemberCommand.Parameters.AddWithValue("@TeamId", teamModel.Id);
+                    insertTeamMemberCommand.Parameters.AddWithValue("@PersonId", teamMember.Id);
+
+                    insertTeamMemberCommand.ExecuteNonQuery();
+                }
+
+                return teamModel;
+            }
         }
     }
 
