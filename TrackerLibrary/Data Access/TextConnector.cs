@@ -8,7 +8,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerLibrary.Data_Access
 {
-    public class TextConnector : IDataConnection
+    internal class TextConnector : IDataConnection
     {
         private const string PrizesFile = "PrizeModel.csv";
         private const string PeopleFile = "PersonModel.csv";
@@ -112,8 +112,9 @@ namespace TrackerLibrary.Data_Access
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
 
-
-
-        
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

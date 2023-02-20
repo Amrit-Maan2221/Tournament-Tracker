@@ -7,7 +7,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerLibrary.Data_Access.TextHelpers
 {
-    public static class TextConnectorProcessor
+    internal static class TextConnectorProcessor
     {
         public static string FullFilePath(this string fileName)
         {

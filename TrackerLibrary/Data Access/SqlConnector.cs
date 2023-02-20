@@ -9,7 +9,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerLibrary.Data_Access
 {
-    public class SqlConnector : IDataConnection
+    internal class SqlConnector : IDataConnection
     {
         private const string DATABASE_NAME = "Tournaments";
 
@@ -113,6 +113,67 @@ namespace TrackerLibrary.Data_Access
                     }
                 }
 
+            }
+
+            return output;
+        }
+
+
+        /// <summary>
+        /// Returns a list of all teams from the database
+        /// </summary>
+        /// <returns>List of teams information</returns>
+        public List<TeamModel> GetTeam_All()
+        {
+            List<TeamModel> output = new List<TeamModel>();
+
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
+            {
+                SqlCommand command = new SqlCommand("[dbo].[spTeams_GetAll]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        TeamModel team = new TeamModel();
+                        team.TeamName = reader["TeamName"].ToString();
+                        bool placeNumberValidNumber = int.TryParse(reader["Id"].ToString(), out int id);
+                        if (placeNumberValidNumber)
+                        {
+                            team.Id = id;
+                        }
+                        output.Add(team);
+                    }
+                }
+
+                // Retrive team members
+                command = new SqlCommand("[dbo].[spTeamMembers_GetByTeam]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (TeamModel team in output)
+                {
+                    command.Parameters.AddWithValue("@TeamId", team.Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PersonModel person = new PersonModel();
+                            person.FirstName = reader["FirstName"].ToString();
+                            person.LastName = reader["LastName"].ToString();
+                            person.CellPhoneNumber = reader["CellphoneNumber"].ToString();
+                            person.EmailAddress = reader["EmailAddress"].ToString();
+                            bool placeNumberValidNumber = int.TryParse(reader["Id"].ToString(), out int id);
+                            if (placeNumberValidNumber)
+                            {
+                                person.Id = id;
+                            }
+                            team.TeamMembers.Add(person);
+                        }
+                    }
+                    // Clear the parameters
+                    command.Parameters.Clear();
+                }
             }
 
             return output;
