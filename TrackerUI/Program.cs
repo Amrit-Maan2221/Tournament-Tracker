@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrackerUI
@@ -20,7 +17,7 @@ namespace TrackerUI
             // Add Connections
             TrackerLibrary.GlobalConfig.InitializeConnection(TrackerLibrary.DatabaseType.Sql);
 
-            Application.Run(new CreateTournamentForm()); 
+            Application.Run(new CreateTournamentForm());
             //Application.Run(new TournamentDashbordForm());
         }
     }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary.Data_Access
@@ -99,7 +95,7 @@ namespace TrackerLibrary.Data_Access
                 {
                     while (reader.Read())
                     {
-                        PersonModel person= new PersonModel();
+                        PersonModel person = new PersonModel();
                         person.FirstName = reader["FirstName"].ToString();
                         person.LastName = reader["LastName"].ToString();
                         person.CellPhoneNumber = reader["CellphoneNumber"].ToString();
