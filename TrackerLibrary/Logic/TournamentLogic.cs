@@ -14,7 +14,7 @@ namespace TrackerLibrary.Logic
         // Create our first round of matchups
         // Create every round after that - 8 matchups - 4 matchups - 2 matchups - 1 matchup
 
-        public static void CreateRounds(TournamentModel model)
+        public static void CreateRounds(Tournament model)
         {
             List<TeamModel> randomizedTeams = RandomizeTeamOrder(model.EnteredTeams);
             int rounds = FindNumberOfRounds(randomizedTeams.Count);
