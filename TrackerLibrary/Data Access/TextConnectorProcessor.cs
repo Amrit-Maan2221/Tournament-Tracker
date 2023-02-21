@@ -218,15 +218,18 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             {
                 string[] cols = line.Split(',');
 
-                MatchupModel m = new MatchupModel
-                {
-                    Id = int.Parse(cols[0]),
-                    Entries = ConvertStringToMatchupEntryModels(cols[1]),
-                    Winner = LookupTeamById(int.Parse(cols[2])),
-                    MatchupRound = int.Parse(cols[3])
-                };
+                MatchupModel matchup = new MatchupModel();
+                matchup.Id = int.Parse(cols[0]);
+                matchup.Entries = ConvertStringToMatchupEntryModels(cols[1]);
 
-                output.Add(m);
+                if (cols[2].Length == 0)
+                    matchup.Winner = null;
+                else
+                    matchup.Winner = LookupTeamById(int.Parse(cols[2]));
+
+                matchup.MatchupRound = int.Parse(cols[3]);
+
+                output.Add(matchup);
             }
 
             return output;
@@ -360,6 +363,8 @@ namespace TrackerLibrary.Data_Access.TextHelpers
             }
 
             matchup.Id = currentId;
+
+            matchups.Add(matchup);
 
             List<string> lines = new List<string>();
 
