@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TrackerLibrary;
+using TrackerLibrary.Logic;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -127,7 +128,8 @@ namespace TrackerUI
 
 
 
-            // TODO - Wire our Matchups
+            // Wire our matchups
+            TournamentLogic.CreateRounds(tournament);
 
             // Create Tournament entry
             // Create all of the Prize entries
