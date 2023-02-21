@@ -231,8 +231,11 @@ namespace TrackerLibrary.Data_Access
                 SaveTournamentPrizes(connection, model);
 
                 SaveTournamentEntries(connection, model);
+
+                SaveTournamentRounds(connection, model);
             }
         }
+
 
 
         private void SaveTournament(SqlConnection connection, TournamentModel model)
@@ -267,12 +270,6 @@ namespace TrackerLibrary.Data_Access
                 tournamentPrizeId.Direction = ParameterDirection.Output;
                 insertTournamentPrizesCommand.Parameters.Add(tournamentPrizeId);
                 insertTournamentPrizesCommand.ExecuteNonQuery();
-
-                //bool ValidNumber = int.TryParse(tournamentPrizeId.Value.ToString(), out int id);
-                //if (ValidNumber)
-                //{
-                //    pz.Id = id;
-                //}
             }
         }
 
@@ -289,6 +286,60 @@ namespace TrackerLibrary.Data_Access
                 tournamentEntriesId.Direction = ParameterDirection.Output;
                 insertTournamentEnteriesCommand.Parameters.Add(tournamentEntriesId);
                 insertTournamentEnteriesCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void SaveTournamentRounds(SqlConnection connection, TournamentModel model)
+        {
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel matchup in round)
+                {
+                    SqlCommand insertMatchupsCommand = new SqlCommand("[dbo].[spMatchups_Insert]", connection);
+                    insertMatchupsCommand.CommandType = CommandType.StoredProcedure;
+                    insertMatchupsCommand.Parameters.AddWithValue("@TournamentId", model.Id);
+                    insertMatchupsCommand.Parameters.AddWithValue("@MatchupRound", matchup.MatchupRound);
+
+                    SqlParameter matchupId = new SqlParameter("@Id", SqlDbType.Int);
+                    matchupId.Direction = ParameterDirection.Output;
+                    insertMatchupsCommand.Parameters.Add(matchupId);
+                    insertMatchupsCommand.ExecuteNonQuery();
+
+                    bool ValidNumber = int.TryParse(matchupId.Value.ToString(), out int id);
+                    if (ValidNumber)
+                    {
+                        matchup.Id = id;
+                    }
+
+                    foreach (MatchupEntryModel entry in matchup.Entries)
+                    {
+                        SqlCommand insertMatchupsEntryCommand = new SqlCommand("[dbo].[spMatchupEntries_Insert]", connection);
+                        insertMatchupsEntryCommand.CommandType = CommandType.StoredProcedure;
+                        insertMatchupsEntryCommand.Parameters.AddWithValue("@MatchupId", matchup.Id);
+                        
+                        if (entry.ParentMatchup == null)
+                        {
+                            insertMatchupsEntryCommand.Parameters.AddWithValue("@ParentMatchupId", DBNull.Value);
+                        }
+                        else
+                        {
+                            insertMatchupsEntryCommand.Parameters.AddWithValue("@ParentMatchupId", entry.ParentMatchup.Id);
+                        }
+
+                        if (entry.TeamCompeting == null)
+                        {
+                            insertMatchupsEntryCommand.Parameters.AddWithValue("@TeamCompetingId", DBNull.Value);
+                        }
+                        else
+                        {
+                            insertMatchupsEntryCommand.Parameters.AddWithValue("@TeamCompetingId", entry.TeamCompeting.Id);
+                        }
+                        SqlParameter matchupEntryId = new SqlParameter("@Id", SqlDbType.Int);
+                        matchupEntryId.Direction = ParameterDirection.Output;
+                        insertMatchupsEntryCommand.Parameters.Add(matchupEntryId);
+                        insertMatchupsEntryCommand.ExecuteNonQuery();
+                    }
+                }
             }
         }
     }

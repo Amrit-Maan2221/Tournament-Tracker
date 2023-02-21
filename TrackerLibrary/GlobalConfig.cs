@@ -5,6 +5,12 @@ namespace TrackerLibrary
 {
     public static class GlobalConfig
     {
+        internal const string PrizesFile = "PrizeModel.csv";
+        internal const string PeopleFile = "PersonModel.csv";
+        internal const string TeamFile = "TeamModel.csv";
+        internal const string TournamentFile = "TournamentModel.csv";
+        internal const string MatchupFile = "MatchupModel.csv";
+        internal const string MatchupEntryFile = "MatchupEntryModel.csv";
 
         public static IDataConnection Connection { get; private set; }
 
