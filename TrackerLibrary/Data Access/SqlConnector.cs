@@ -181,7 +181,7 @@ namespace TrackerLibrary.Data_Access
                 {
                     MatchupModel matchup = new MatchupModel();
                     matchup.Id = int.Parse(matchupsReader["Id"].ToString());
-                    bool validWinnerId = int.TryParse(matchupsReader["Id"].ToString(), out int winnerId);
+                    bool validWinnerId = int.TryParse(matchupsReader["WinnerId"].ToString(), out int winnerId);
                     if (validWinnerId)
                     {
                         matchup.WinnerId = winnerId;
