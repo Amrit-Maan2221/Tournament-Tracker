@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.createTournament = new System.Windows.Forms.Label();
-            this.loadTournamentDropdown = new System.Windows.Forms.ComboBox();
+            this.loadExistingTournamentDropDown = new System.Windows.Forms.ComboBox();
             this.selectTeamLable = new System.Windows.Forms.Label();
             this.loadTournamentButton = new System.Windows.Forms.Button();
             this.createTournamentButton = new System.Windows.Forms.Button();
@@ -46,13 +46,13 @@
             this.createTournament.TabIndex = 11;
             this.createTournament.Text = "Tournament Dashbord";
             // 
-            // loadTournamentDropdown
+            // loadExistingTournamentDropDown
             // 
-            this.loadTournamentDropdown.FormattingEnabled = true;
-            this.loadTournamentDropdown.Location = new System.Drawing.Point(298, 188);
-            this.loadTournamentDropdown.Name = "loadTournamentDropdown";
-            this.loadTournamentDropdown.Size = new System.Drawing.Size(283, 44);
-            this.loadTournamentDropdown.TabIndex = 18;
+            this.loadExistingTournamentDropDown.FormattingEnabled = true;
+            this.loadExistingTournamentDropDown.Location = new System.Drawing.Point(275, 188);
+            this.loadExistingTournamentDropDown.Name = "loadExistingTournamentDropDown";
+            this.loadExistingTournamentDropDown.Size = new System.Drawing.Size(322, 44);
+            this.loadExistingTournamentDropDown.TabIndex = 18;
             // 
             // selectTeamLable
             // 
@@ -74,9 +74,9 @@
             this.loadTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadTournamentButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadTournamentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.loadTournamentButton.Location = new System.Drawing.Point(321, 256);
+            this.loadTournamentButton.Location = new System.Drawing.Point(330, 301);
             this.loadTournamentButton.Name = "loadTournamentButton";
-            this.loadTournamentButton.Size = new System.Drawing.Size(209, 41);
+            this.loadTournamentButton.Size = new System.Drawing.Size(209, 52);
             this.loadTournamentButton.TabIndex = 26;
             this.loadTournamentButton.Text = "Load Tournament";
             this.loadTournamentButton.UseVisualStyleBackColor = true;
@@ -89,12 +89,13 @@
             this.createTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createTournamentButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createTournamentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.createTournamentButton.Location = new System.Drawing.Point(307, 432);
+            this.createTournamentButton.Location = new System.Drawing.Point(330, 432);
             this.createTournamentButton.Name = "createTournamentButton";
-            this.createTournamentButton.Size = new System.Drawing.Size(232, 56);
+            this.createTournamentButton.Size = new System.Drawing.Size(209, 56);
             this.createTournamentButton.TabIndex = 27;
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
+            this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
             // 
             // TournamentDashbordForm
             // 
@@ -104,7 +105,7 @@
             this.ClientSize = new System.Drawing.Size(862, 576);
             this.Controls.Add(this.createTournamentButton);
             this.Controls.Add(this.loadTournamentButton);
-            this.Controls.Add(this.loadTournamentDropdown);
+            this.Controls.Add(this.loadExistingTournamentDropDown);
             this.Controls.Add(this.selectTeamLable);
             this.Controls.Add(this.createTournament);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -119,7 +120,7 @@
         #endregion
 
         private System.Windows.Forms.Label createTournament;
-        private System.Windows.Forms.ComboBox loadTournamentDropdown;
+        private System.Windows.Forms.ComboBox loadExistingTournamentDropDown;
         private System.Windows.Forms.Label selectTeamLable;
         private System.Windows.Forms.Button loadTournamentButton;
         private System.Windows.Forms.Button createTournamentButton;

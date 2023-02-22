@@ -120,7 +120,7 @@ namespace TrackerUI
             // Create our Tournament
             TournamentModel tournament = new TournamentModel
             {
-                TournamnetName = tournamentNameValue.Text,
+                TournamentName = tournamentNameValue.Text,
                 EntryFee = fee,
                 Prizes = selectedPrizes,
                 EnteredTeams = selectedTeams
