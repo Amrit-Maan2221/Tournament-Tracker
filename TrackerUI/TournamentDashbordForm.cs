@@ -25,5 +25,12 @@ namespace TrackerUI
             CreateTournamentForm frm = new CreateTournamentForm();
             frm.Show();
         }
+
+        private void loadTournamentButton_Click(object sender, System.EventArgs e)
+        {
+            TournamentModel tournament = (TournamentModel)loadExistingTournamentDropDown.SelectedItem;
+            TournamentViewForm frm = new TournamentViewForm(tournament);
+            frm.Show();
+        }
     }
 }
