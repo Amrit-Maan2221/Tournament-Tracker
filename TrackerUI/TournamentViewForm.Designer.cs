@@ -84,7 +84,7 @@
             // 
             this.roundDropDown.FormattingEnabled = true;
             this.roundDropDown.Location = new System.Drawing.Point(152, 128);
-            this.roundDropDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.roundDropDown.Margin = new System.Windows.Forms.Padding(2);
             this.roundDropDown.Name = "roundDropDown";
             this.roundDropDown.Size = new System.Drawing.Size(253, 45);
             this.roundDropDown.TabIndex = 3;
@@ -97,12 +97,13 @@
             this.unplayedOnlyCheckbox.Font = new System.Drawing.Font("Segoe UI", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unplayedOnlyCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.unplayedOnlyCheckbox.Location = new System.Drawing.Point(152, 181);
-            this.unplayedOnlyCheckbox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.unplayedOnlyCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.unplayedOnlyCheckbox.Name = "unplayedOnlyCheckbox";
             this.unplayedOnlyCheckbox.Size = new System.Drawing.Size(257, 50);
             this.unplayedOnlyCheckbox.TabIndex = 4;
             this.unplayedOnlyCheckbox.Text = "Unplayed Only";
             this.unplayedOnlyCheckbox.UseVisualStyleBackColor = true;
+            this.unplayedOnlyCheckbox.CheckedChanged += new System.EventHandler(this.unplayedOnlyCheckbox_CheckedChanged);
             // 
             // matchupListBox
             // 
@@ -110,7 +111,7 @@
             this.matchupListBox.FormattingEnabled = true;
             this.matchupListBox.ItemHeight = 37;
             this.matchupListBox.Location = new System.Drawing.Point(42, 245);
-            this.matchupListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.matchupListBox.Margin = new System.Windows.Forms.Padding(2);
             this.matchupListBox.Name = "matchupListBox";
             this.matchupListBox.Size = new System.Drawing.Size(368, 298);
             this.matchupListBox.TabIndex = 5;
@@ -143,7 +144,7 @@
             // teamOneScoreValue
             // 
             this.teamOneScoreValue.Location = new System.Drawing.Point(597, 308);
-            this.teamOneScoreValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.teamOneScoreValue.Margin = new System.Windows.Forms.Padding(2);
             this.teamOneScoreValue.Name = "teamOneScoreValue";
             this.teamOneScoreValue.Size = new System.Drawing.Size(227, 43);
             this.teamOneScoreValue.TabIndex = 8;
@@ -151,7 +152,7 @@
             // teamTwoScoreValue
             // 
             this.teamTwoScoreValue.Location = new System.Drawing.Point(597, 531);
-            this.teamTwoScoreValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.teamTwoScoreValue.Margin = new System.Windows.Forms.Padding(2);
             this.teamTwoScoreValue.Name = "teamTwoScoreValue";
             this.teamTwoScoreValue.Size = new System.Drawing.Size(227, 43);
             this.teamTwoScoreValue.TabIndex = 11;
@@ -201,12 +202,13 @@
             this.scoreButton.Font = new System.Drawing.Font("Segoe UI Semibold", 16.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.scoreButton.Location = new System.Drawing.Point(823, 386);
-            this.scoreButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scoreButton.Margin = new System.Windows.Forms.Padding(2);
             this.scoreButton.Name = "scoreButton";
             this.scoreButton.Size = new System.Drawing.Size(151, 66);
             this.scoreButton.TabIndex = 13;
             this.scoreButton.Text = "Score";
             this.scoreButton.UseVisualStyleBackColor = true;
+            this.scoreButton.Click += new System.EventHandler(this.scoreButton_Click);
             // 
             // TournamentViewForm
             // 
@@ -229,7 +231,7 @@
             this.Controls.Add(this.tournamentName);
             this.Controls.Add(this.headerLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TournamentViewForm";
             this.Text = "Tournament Viewer";
             this.ResumeLayout(false);

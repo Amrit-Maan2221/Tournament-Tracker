@@ -576,6 +576,34 @@ namespace TrackerLibrary.Data_Access
             }
         }
 
+        public void UpdateMatchup(MatchupModel model)
+        {
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
+            {
+                connection.Open();
+                if (model.Winner != null)
+                {
+                    SqlCommand updateMatchCommand = new SqlCommand("[dbo].[spMatchups_Update]", connection);
+                    updateMatchCommand.CommandType = CommandType.StoredProcedure;
+                    updateMatchCommand.Parameters.AddWithValue("@Id", model.Id);
+                    updateMatchCommand.Parameters.AddWithValue("@WinnerId", model.Winner.Id);
+                    updateMatchCommand.ExecuteNonQuery();
+                }
+
+                foreach (MatchupEntryModel matchEntry in model.Entries)
+                {
+                    if (matchEntry.TeamCompeting != null)
+                    {
+                        SqlCommand updateMatchEntryCommand = new SqlCommand("[dbo].[spMatchupEntries_Update]", connection);
+                        updateMatchEntryCommand.CommandType = CommandType.StoredProcedure;
+                        updateMatchEntryCommand.Parameters.AddWithValue("@Id", matchEntry.Id);
+                        updateMatchEntryCommand.Parameters.AddWithValue("@TeamCompetingId", matchEntry.TeamCompeting.Id);
+                        updateMatchEntryCommand.Parameters.AddWithValue("@Score", matchEntry.Score);
+                        updateMatchEntryCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
     }
 
 }

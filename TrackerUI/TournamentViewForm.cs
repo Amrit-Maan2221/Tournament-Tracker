@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -67,12 +68,20 @@ namespace TrackerUI
                     selectedMatchups.Clear();
                     foreach (MatchupModel m in matchups)
                     {
-                        selectedMatchups.Add(m);
+                        if (m.Winner == null || !unplayedOnlyCheckbox.Checked)
+                        {
+                            selectedMatchups.Add(m);
+                        }
                     }
                 }
             }
 
-            LoadMatchup(selectedMatchups.First());
+            if (selectedMatchups.Count > 0)
+            {
+                LoadMatchup(selectedMatchups.First());
+            }
+
+            DisplayMatchupInfo();
         }
 
         private void LoadMatchup(MatchupModel m)
@@ -122,6 +131,108 @@ namespace TrackerUI
         private void matchupListBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             LoadMatchup((MatchupModel)matchupListBox.SelectedItem);
+        }
+
+        private void unplayedOnlyCheckbox_CheckedChanged(object sender, System.EventArgs e)
+        {
+            LoadMatchups((int)roundDropDown.SelectedItem);
+        }
+
+        private void DisplayMatchupInfo()
+        {
+            bool isVisible = (selectedMatchups.Count > 0);
+
+            teamOneName.Visible = isVisible;
+            teamOneScoreLabel.Visible = isVisible;
+            teamOneScoreValue.Visible = isVisible;
+            teamTwoName.Visible = isVisible;
+            teamTwoScoreLabel.Visible = isVisible;
+            teamTwoScoreValue.Visible = isVisible;
+            versusLabel.Visible = isVisible;
+            scoreButton.Visible = isVisible;
+        }
+
+        private void scoreButton_Click(object sender, System.EventArgs e)
+        {
+            MatchupModel selectedMatch = (MatchupModel)matchupListBox.SelectedItem;
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+
+
+            for (int i = 0; i < selectedMatch.Entries.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (selectedMatch.Entries[0].TeamCompeting != null)
+                    {
+                        bool scoreValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
+
+                        if (scoreValid)
+                        {
+                            selectedMatch.Entries[0].Score = teamOneScore;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid score for team 1.");
+                            return;
+                        }
+                    }
+                }
+
+                if (i == 1)
+                {
+                    if (selectedMatch.Entries[1].TeamCompeting != null)
+                    {
+                        bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
+
+                        if (scoreValid)
+                        {
+                            selectedMatch.Entries[1].Score = teamTwoScore;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid score for team 2.");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            if (teamOneScore > teamTwoScore)
+            {
+                // Team one wins
+                selectedMatch.Winner = selectedMatch.Entries[0].TeamCompeting;
+            }
+            else if (teamTwoScore > teamOneScore)
+            {
+                selectedMatch.Winner = selectedMatch.Entries[1].TeamCompeting;
+            }
+            else
+            {
+                MessageBox.Show("I do not handle tie games.");
+            }
+
+            foreach (List<MatchupModel> round in tournament.Rounds)
+            {
+                foreach (MatchupModel match in round)
+                {
+                    foreach (MatchupEntryModel matchEntry in match.Entries)
+                    {
+                        if (matchEntry.ParentMatchup != null)
+                        {
+                            if (matchEntry.ParentMatchup.Id == selectedMatch.Id)
+                            {
+                                matchEntry.TeamCompeting = selectedMatch.Winner;
+                                GlobalConfig.Connection.UpdateMatchup(match);
+                            }
+                        }
+                    }
+                }
+            }
+
+            LoadMatchups((int)roundDropDown.SelectedItem);
+
+            GlobalConfig.Connection.UpdateMatchup(selectedMatch);
         }
     }
 }
