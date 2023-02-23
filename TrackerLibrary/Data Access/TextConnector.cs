@@ -20,7 +20,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The person information</param>
         /// <returns>The person information plus the unique identifier.</returns>
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             // Load the text file
             // Convert the text to a List<PersonModel>
@@ -42,7 +42,6 @@ namespace TrackerLibrary.Data_Access
             // Save the list<string> to the text file
             people.SaveToPeopleFile(PeopleFile);
 
-            return model;
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The prize information</param>
         /// <returns>The prize information plus the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             // Load the text file
             // Convert the text to a List<PrizeModel>
@@ -72,8 +71,6 @@ namespace TrackerLibrary.Data_Access
             // Convert the prizes to List<string>
             // Save the list<string> to the text file
             prizes.SaveToPrizeFile(PrizesFile);
-
-            return model;
         }
 
         /// <summary>
@@ -81,7 +78,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The team information</param>
         /// <returns>The team information plus the unique identifier.</returns>
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
             List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
 
@@ -98,8 +95,6 @@ namespace TrackerLibrary.Data_Access
             teams.Add(model);
 
             teams.SaveToTeamFile(TeamFile);
-
-            return model;
         }
 
 

@@ -346,7 +346,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The prize information</param>
         /// <returns>The prize information plus the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
             {
@@ -369,8 +369,6 @@ namespace TrackerLibrary.Data_Access
                     model.Id = id;
                 }
             }
-
-            return model;
         }
 
 
@@ -379,7 +377,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The person information</param>
         /// <returns>The person information plus the unique identifier.</returns>
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
             {
@@ -403,8 +401,6 @@ namespace TrackerLibrary.Data_Access
                 }
 
             }
-
-            return model;
         }
 
 
@@ -415,7 +411,7 @@ namespace TrackerLibrary.Data_Access
         /// </summary>
         /// <param name="model">The team information<</param>
         /// <returns>The team information plus the unique identifier.</returns>
-        public TeamModel CreateTeam(TeamModel teamModel)
+        public void CreateTeam(TeamModel teamModel)
         {
             using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
             {
@@ -444,8 +440,6 @@ namespace TrackerLibrary.Data_Access
 
                     insertTeamMemberCommand.ExecuteNonQuery();
                 }
-
-                return teamModel;
             }
         }
 
