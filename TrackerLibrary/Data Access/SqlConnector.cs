@@ -598,6 +598,20 @@ namespace TrackerLibrary.Data_Access
                 }
             }
         }
+
+
+        public void CompleteTournament(TournamentModel model)
+        {
+            //spTournament_Update
+            using (SqlConnection connection = new SqlConnection(GlobalConfig.GetConnectionString(DATABASE_NAME)))
+            {
+                SqlCommand command = new SqlCommand("[dbo].[spTournaments_Complete]", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Id", model.Id);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
     }
 
 }

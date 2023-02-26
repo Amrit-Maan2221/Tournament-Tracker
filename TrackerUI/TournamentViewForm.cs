@@ -25,7 +25,7 @@ namespace TrackerUI
             WireUpLists();
 
             LoadFormData();
-
+            tournament.OnTournamentComplete += Tournament_OnTournamentComplete;
             LoadRounds();
         }
 
@@ -249,6 +249,12 @@ namespace TrackerUI
                 return;
             }
             LoadMatchups((int)roundDropDown.SelectedItem);
+        }
+
+
+        private void Tournament_OnTournamentComplete(object sender, DateTime e)
+        {
+            this.Close();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TrackerLibrary.Models
 {
@@ -31,5 +32,13 @@ namespace TrackerLibrary.Models
         /// The matchups per round
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
+
+
+        public event EventHandler<DateTime> OnTournamentComplete;
+
+        public void InvokeCompleteTournament()
+        {
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }
