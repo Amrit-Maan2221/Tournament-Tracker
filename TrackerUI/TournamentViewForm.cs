@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TrackerLibrary;
+using TrackerLibrary.Logic;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -75,25 +77,23 @@ namespace TrackerUI
                     }
                 }
             }
-
             if (selectedMatchups.Count > 0)
             {
                 LoadMatchup(selectedMatchups.First());
             }
-
             DisplayMatchupInfo();
         }
 
-        private void LoadMatchup(MatchupModel m)
+        private void LoadMatchup(MatchupModel matchup)
         {
-            for (int i = 0; i < m.Entries.Count; i++)
+            for (int i = 0; i < matchup.Entries.Count; i++)
             {
                 if (i == 0)
                 {
-                    if (m.Entries[0].TeamCompeting != null)
+                    if (matchup.Entries[0].TeamCompeting != null)
                     {
-                        teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
-                        teamOneScoreValue.Text = m.Entries[0].Score.ToString();
+                        teamOneName.Text = matchup.Entries[0].TeamCompeting.TeamName;
+                        teamOneScoreValue.Text = matchup.Entries[0].Score.ToString();
 
                         teamTwoName.Text = "<bye>";
                         teamTwoScoreValue.Text = "0";
@@ -108,10 +108,10 @@ namespace TrackerUI
 
                 if (i == 1)
                 {
-                    if (m.Entries[1].TeamCompeting != null)
+                    if (matchup.Entries[1].TeamCompeting != null)
                     {
-                        teamTwoName.Text = m.Entries[1].TeamCompeting.TeamName;
-                        teamTwoScoreValue.Text = m.Entries[1].Score.ToString();
+                        teamTwoName.Text = matchup.Entries[1].TeamCompeting.TeamName;
+                        teamTwoScoreValue.Text = matchup.Entries[1].Score.ToString();
 
                     }
                     else
@@ -130,7 +130,10 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            LoadMatchup((MatchupModel)matchupListBox.SelectedItem);
+            if (matchupListBox.SelectedItem != null)
+            {
+                LoadMatchup((MatchupModel)matchupListBox.SelectedItem);
+            }
         }
 
         private void unplayedOnlyCheckbox_CheckedChanged(object sender, System.EventArgs e)
@@ -198,41 +201,9 @@ namespace TrackerUI
                 }
             }
 
-            if (teamOneScore > teamTwoScore)
-            {
-                // Team one wins
-                selectedMatch.Winner = selectedMatch.Entries[0].TeamCompeting;
-            }
-            else if (teamTwoScore > teamOneScore)
-            {
-                selectedMatch.Winner = selectedMatch.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I do not handle tie games.");
-            }
 
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel match in round)
-                {
-                    foreach (MatchupEntryModel matchEntry in match.Entries)
-                    {
-                        if (matchEntry.ParentMatchup != null)
-                        {
-                            if (matchEntry.ParentMatchup.Id == selectedMatch.Id)
-                            {
-                                matchEntry.TeamCompeting = selectedMatch.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(match);
-                            }
-                        }
-                    }
-                }
-            }
-
+            TournamentLogic.UpdateTournamentResults(tournament);
             LoadMatchups((int)roundDropDown.SelectedItem);
-
-            GlobalConfig.Connection.UpdateMatchup(selectedMatch);
         }
     }
 }

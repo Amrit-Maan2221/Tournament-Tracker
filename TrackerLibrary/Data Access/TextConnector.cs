@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TrackerLibrary.Data_Access.TextHelpers;
+using TrackerLibrary.Logic;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary.Data_Access
@@ -118,6 +119,8 @@ namespace TrackerLibrary.Data_Access
             tournaments.Add(model);
 
             tournaments.SaveToTournamentFile();
+
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
 
